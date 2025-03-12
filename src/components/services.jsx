@@ -31,28 +31,30 @@ export default function WorkWithUs() {
 
     const stats = [
         { label: "Office", value: "1" },
-        { label: "Agents", value: "6" },
+        { label: "Technicians", value: "6" },
         { label: "Days a Week", value: "5" },
         { label: "Customer Service", value: "Local" },
     ];
 
     const links = [
-        { label: "Termite Control", href: "#" },
-        { label: "Pest Control", href: "#" },
-        { label: "Rodent Control", href: "#" },
-        { label: "Wildlife Management", href: "#" },
+        { label: "Pest Library", href: "/pestlibrary" },
+        { label: "Free Quote", href: "/freequote" },
+        { label: "Testimonials", href: "/testimonials" },
+        { label: "Your Account", href: "/clientlogin" },
     ];
 
     return (
         <section
-            id="work-with-us"
-            className="position-relative text-white py-5 text-center"
+            id="services"
+            className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8"
             ref={sectionRef}
             style={{
-                height: '70vh', // Limit the height to crop the video
+                height: '100vh', // Limit the height to crop the video
                 overflow: 'hidden', // Hide any part of the video that overflows
                 position: 'relative',
-                marginTop: "23%"
+                marginTop: "30px",
+                fontFamily: "Quicksand",
+                borderRadius: "2%",
             }}
         >
             {/* Background Video */}
@@ -60,6 +62,7 @@ export default function WorkWithUs() {
                 className="position-absolute top-0 start-0 w-100"
                 style={{
                     height: '100%', // Make the video fill the section height
+                    borderRadius: '2%',
                     objectFit: 'cover', // Ensures the video scales properly
                     objectPosition: 'center ', // Crop the video to focus on the top part
                     zIndex: -1, // Ensure the video stays behind content
@@ -89,8 +92,9 @@ export default function WorkWithUs() {
                     backdropFilter: 'blur(10px)', // Apply blur to the background
                     borderRadius: '10px', // Rounded corners for aesthetic
                     boxShadow: '0 4px 15px rgba(0, 0, 0, 0.4)', // Subtle shadow for separation
-                    padding: '0px', // Padding inside the text box
+                    padding: '5px', // Padding inside the text box
                     maxWidth: '90%', // Limit the width
+                    marginTop: '150px'
                 }}
             >
                 <h2 className="display-3 mb-3">Services</h2>

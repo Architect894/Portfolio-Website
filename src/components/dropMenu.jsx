@@ -1,187 +1,179 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+
+import React, { useState } from "react";
 import Link from "next/link";
+import "../styles/global.css";
+import styles from "../styles/styles.module.css";
 
 export default function DropMenu() {
-    const [flyoutOpen, setFlyoutOpen] = useState(false);
-    const [loginFlyoutOpen, setLoginFlyoutOpen] = useState(false); // For the login dropdown
-    const [isSticky, setIsSticky] = useState(false);
-    const menuRef = useRef(null);
-    const originalOffsetTop = useRef(0);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const toggleFlyout = () => {
-        setFlyoutOpen(!flyoutOpen);
+    const toggleMobileMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
     };
 
-    const toggleLoginFlyout = () => {
-        setLoginFlyoutOpen(!loginFlyoutOpen);
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
     };
-
-    useEffect(() => {
-        if (menuRef.current) {
-            // Store the original offsetTop of the element
-            originalOffsetTop.current =
-                menuRef.current.getBoundingClientRect().top + window.scrollY;
-        }
-
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY;
-            setIsSticky(scrollPosition >= originalOffsetTop.current);
-        };
-
-        // Add the scroll event listener
-        window.addEventListener("scroll", handleScroll);
-
-        // Cleanup on unmount
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
 
     return (
-        <div
-            ref={menuRef}
-            className={`${isSticky ? "fixed top-0 left-1/2 transform -translate-x-1/2 w-50" : "absolute left-1/2 transform -translate-x-1/2 top-0 w-50"}`}
-
+        <header
+            className="menu-container"
             style={{
-                zIndex: 9999,
-                backgroundColor: "rgba(850, 850, 2500, 0.8)",
-                borderRadius: "15px",
-                boxShadow: "0 4px 15px rgba(0, 0, 0, 0.8)",
-                top: isSticky ? "0" : `${originalOffsetTop.current}px`, // Reset to original position
-                transition: "top 0.3s ease",
-                fontFamily: "Quicksand",
-                marginTop: "10px"
+                position: "sticky",
+                top: "0",
+                zIndex: "50",
+                backgroundColor: "rgba(2, 41, 87, 0.8)",
+                backdropFilter: "blur(5px)",
+                boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
+                padding: "10px 20px",
             }}
         >
-            <div className="container-fluid d-flex justify-content-between align-items-center">
-                {/* Solutions Dropdown */}
-                <div>
+            <nav
+                className="mx-auto flex max-w-8xl items-center justify-between p-0 lg:px-8"
+                aria-label="Global"
+            >
+                {/* Logo */}
+                <div className="flex md:flex-0 lg:mr-5">
+                    <Link href="/" className="-m-1.5 p-1.5">
+                        <span className="sr-only">United Pest Control</span>
+                        <img className="logo-container" src="/UTPC3.png" alt="Logo" />
+                    </Link>
+                </div>
+
+                {/* Desktop Navigation Links */}
+                <div className="hidden lg:flex lg:gap-x-2">
+                    <Link href="/howwework" className="button-container py-1 px-3">
+                        How We Work
+                    </Link>
+                    <Link href="/pestlibrary" className="button-container py-1 px-3">
+                        Pest Library
+                    </Link>
+                    <Link href="/payment" className="button-container py-1 px-3">
+                        Make A Payment
+                    </Link>
+                    <div className="relative">
+                        <button
+                            type="button"
+                            onClick={toggleDropdown}
+                            className="button-container py-1 px-1"
+                        >
+                            The United Difference
+                        </button>
+                        {isDropdownOpen && (
+                            <div className="absolute mt-2 w-48 bg-gray-800 rounded-lg shadow-lg z-20">
+                                <Link
+                                    href="/testimonialResidential"
+                                    className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                                >
+                                    Testimonials
+                                </Link>
+                                <Link
+                                    href="/ourstory"
+                                    className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                                >
+                                    Our Story
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {/* Login and Commercial Buttons */}
+                <div className="hidden lg:flex flex-1 justify-end lg:gap-x-6 button-group">
+                    <Link
+                        href="/clientlogin"
+                        className="text-md font-quicksand text-white bg-blue-600 hover:bg-indigo-500 hover:text-white px-6 py-3 rounded-md shadow-md transition-all flex items-center"
+                    >
+                        Log in <span aria-hidden="true" className="ml-2">
+                            →
+                        </span>
+                    </Link>
+                    <Link
+                        href="/freequote"
+                        className="text-md font-quicksand text-gray-800 bg-yellow-200 hover:bg-yellow-500 hover:text-white px-6 py-3 rounded-md shadow-md transition-all flex items-center"
+                    >
+                        Free Quote <span aria-hidden="true" className="ml-2">
+                            →
+                        </span>
+                    </Link>
+                </div>
+
+                {/* Mobile Menu Toggle Button */}
+                <div className="flex lg:hidden">
                     <button
                         type="button"
-                        className="inline-flex items-center gap-x-3 text-lg font-bold text-black px-2 py-2 rounded-lg shadow-lg transition-all duration-100"
-                        style={{
-                            backgroundColor: "transparent",
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = "rgba(520, 10, 0, 0.5)";
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = "transparent";
-                        }}
-                        onClick={toggleFlyout}
-                        aria-expanded={flyoutOpen}
+                        onClick={toggleMobileMenu}
+                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
                     >
-                        <span>Menu</span>
+                        <span className="sr-only">Open main menu</span>
                         <svg
-                            className="w-10 h-8"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
                             aria-hidden="true"
                         >
                             <path
-                                fillRule="evenodd"
-                                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                                clipRule="evenodd"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                             />
                         </svg>
                     </button>
-
-                    {flyoutOpen && (
-                        <div
-                            className="absolute"
-                            style={{
-                                marginTop: "1px",
-                                width: "140px",
-                                backgroundColor: "rgba(500, 500, 250, 0.4)",
-                                borderRadius: "10px",
-                                boxShadow: "0 4px 15px rgba(0, 0, 0, 0.8)",
-                                padding: "1rem",
-                                backdropFilter: "blur(5px)",
-                                WebkitBackdropFilter: "blur(10px)",
-                                color: "black",
-                            }}
-                        >
-                            <Link href="#" className="block p-2 font-bold hover:text-red-300">
-                                Analytics
-                            </Link>
-                            <Link href="#" className="block p-2 font-bold hover:text-red-300">
-                                Engagement
-                            </Link>
-                            <Link href="#" className="block p-2 font-bold hover:text-red-300">
-                                Security
-                            </Link>
-                            <Link href="#" className="block p-2 font-bold hover:text-red-300">
-                                Integrations
-                            </Link>
-                            <Link href="#" className="block p-2 font-bold hover:text-red-300">
-                                Automations
-                            </Link>
-                            <Link href="#" className="block p-2 font-bold hover:text-red-300">
-                                Reports
-                            </Link>
-                        </div>
-                    )}
                 </div>
+            </nav>
 
-                {/* Login Options Dropdown */}
-                <div>
+            {/* Mobile Navigation Menu */}
+            {isMenuOpen && (
+                <div className="lg:hidden bg-gray-800 text-white p-5">
+                    <Link href="/ourstory" className="block py-2 px-4 hover:bg-gray-700">
+                        How We Work
+                    </Link>
+                    <Link href="/pestlibrary" className="block py-2 px-4 hover:bg-gray-700">
+                        Pest Library
+                    </Link>
+                    <Link href="/payment" className="block py-2 px-4 hover:bg-gray-700">
+                        Make a Payment
+                    </Link>
                     <button
-                        type="button"
-                        className="inline-flex items-center gap-x-3 text-lg font-semibold text-black px-2 py-2 rounded-lg shadow-md transition-all duration-300"
-                        style={{
-                            backgroundColor: "transparent",
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = "rgba(520, 10, 0, 0.5)";
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = "transparent";
-                        }}
-                        onClick={toggleLoginFlyout}
-                        aria-expanded={loginFlyoutOpen}
+                        onClick={toggleDropdown}
+                        className="block w-full text-left py-2 px-4 hover:bg-gray-700"
                     >
-                        <span>Login</span>
-                        <svg
-                            className="w-10 h-8"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
+                        The United Difference
                     </button>
-
-                    {loginFlyoutOpen && (
-                        <div
-                            className="absolute"
-                            style={{
-                                marginTop: "1px",
-                                width: "200px",
-                                backgroundColor: "rgba(500, 500, 250, 0.4",
-                                borderRadius: "10px",
-                                boxShadow: "0 4px 15px rgba(0, 0, 0, 0.8)",
-                                padding: "1rem",
-                                backdropFilter: "blur(10px)",
-                                WebkitBackdropFilter: "blur(10px)",
-                                color: "black",
-                                right: 0, // Align the dropdown to the left of the button
-                            }}
-                        >
-                            <Link href="/commercial" className="block p-2 font-bold hover:text-red-300">
-                                Commercial Login
+                    {isDropdownOpen && (
+                        <div className="pl-4">
+                            <Link
+                                href="/testimonialResidential"
+                                className="block py-4 px-4 hover:bg-gray-700"
+                            >
+                                Testimonials
                             </Link>
-                            <Link href="/residential" className="block p-2 font-bold hover:text-red-300">
-                                Residential Login
+                            <Link
+                                href="/ourstory"
+                                className="block py-4 px-4 hover:bg-gray-700"
+                            >
+                                Our Story
                             </Link>
                         </div>
                     )}
+                    <Link
+                        href="/clientlogin"
+                        className="text-md font-quicksand text-gray-800 bg-blue-600 hover:bg-indigo-500 hover:text-white px-4 py-2 rounded-md shadow-md transition-all"
+                    >
+                        Log in →
+                    </Link>
+                    <Link
+                        href="/freequote"
+                        className="text-md font-quicksand text-gray-800 bg-yellow-200 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded-md shadow-md transition-all"
+                    >
+                        Free Quote →
+                    </Link>
                 </div>
-            </div>
-        </div>
+            )}
+        </header>
     );
 }

@@ -1,211 +1,127 @@
 "use client";
-import React, { useState } from 'react';
-import Link from 'next/link'; // Import Link for navigation
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap
-import styles from '../styles/styles.module.css'; // Import your CSS module
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "../styles/global.css"; // Adjust the path as necessary
+import CommercialLayout from "./layoutCommercial";
 
-const Commercial = () => {
-    const [isLogin, setIsLogin] = useState(true); // Toggle between login and register form
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: '',
-        address: '',
-        city: '',
-        state: '',
-        zipCode: '',
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (isLogin) {
-            console.log('Logging in with:', formData);
-        } else {
-            console.log('Registering with:', formData);
-        }
-    };
+export default function CommercialHome() {
+    const services = [
+        {
+            title: "Comprehensive Pest Management",
+            description:
+                "Tailored pest control plans for your business to ensure a pest-free environment year-round.",
+            image: "/comprehensive.png",
+        },
+        {
+            title: "24/7 Emergency Service",
+            description:
+                "Rapid response for unexpected pest issues, minimizing disruption to your business.",
+            image: "/america.png",
+        },
+        {
+            title: "Industries We Serve",
+            description:
+                "From restaurants and hotels to warehouses and office spaces, we specialize in all industries.",
+            image: "/industry.png",
+        },
+        {
+            title: "Eco-Friendly Solutions",
+            description:
+                "Sustainable pest control methods to protect your business and the environment.",
+            image: "/eco.png",
+        },
+    ];
 
     return (
-        
-        <section
-            id="commercial-portal"
-            className='container my-5' // Add custom background class
-            style={{
-                borderRadius: '10px',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-                padding: '30px',
-                
-
-            }}
-        >
-            <h2 className="text-center mb-4">
-                {isLogin ? 'Employee Login' : 'Employee Registration'}
-            </h2>
-            <form onSubmit={handleSubmit} className="form">
-                <div className="row">
-                    {!isLogin && (
-                        <>
-                            <div className="col-md-6 mb-3">
-                                <label htmlFor="firstName" className="form-label">
-                                    First Name
-                                </label>
-                                <input
-                                    type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    value={formData.firstName}
-                                    onChange={handleChange}
-                                    className="form-control"
-                                    required
-                                />
-                            </div>
-                            <div className="col-md-6 mb-3">
-                                <label htmlFor="lastName" className="form-label">
-                                    Last Name
-                                </label>
-                                <input
-                                    type="text"
-                                    id="lastName"
-                                    name="lastName"
-                                    value={formData.lastName}
-                                    onChange={handleChange}
-                                    className="form-control"
-                                    required
-                                />
-                            </div>
-                        </>
-                    )}
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="email" className="form-label">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="form-control"
-                            required
-                        />
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="phoneNumber" className="form-label">
-                            Phone Number
-                        </label>
-                        <input
-                            type="tel"
-                            id="phoneNumber"
-                            name="phoneNumber"
-                            value={formData.phoneNumber}
-                            onChange={handleChange}
-                            className="form-control"
-                            required
-                        />
-                    </div>
-                    {/* Address Section */}
-                    <div className="col-12 mb-3">
-                        <label htmlFor="address" className="form-label">
-                            Address
-                        </label>
-                        <input
-                            type="text"
-                            id="address"
-                            name="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                            className="form-control"
-                            placeholder="123 Main St"
-                            required
-                        />
-                    </div>
-                    <div className="col-md-4 mb-3">
-                        <label htmlFor="city" className="form-label">
-                            City
-                        </label>
-                        <input
-                            type="text"
-                            id="city"
-                            name="city"
-                            value={formData.city}
-                            onChange={handleChange}
-                            className="form-control"
-                            required
-                        />
-                    </div>
-                    <div className="col-md-4 mb-3">
-                        <label htmlFor="state" className="form-label">
-                            State
-                        </label>
-                        <input
-                            type="text"
-                            id="state"
-                            name="state"
-                            value={formData.state}
-                            onChange={handleChange}
-                            className="form-control"
-                            required
-                        />
-                    </div>
-                    <div className="col-md-4 mb-3">
-                        <label htmlFor="zipCode" className="form-label">
-                            Zip Code
-                        </label>
-                        <input
-                            type="text"
-                            id="zipCode"
-                            name="zipCode"
-                            value={formData.zipCode}
-                            onChange={handleChange}
-                            className="form-control"
-                            required
-                        />
-                    </div>
-                </div>
-                <button
-                    type="submit"
-                    className="btn btn-primary w-100 mt-3"
-                    style={{ padding: '10px', fontSize: '16px' }}
-                >
-                    {isLogin ? 'Login' : 'Register'}
-                </button>
-            </form>
-            <div className="text-center mt-4">
-                <button
-                    onClick={() => setIsLogin(!isLogin)}
-                    className="btn btn-link"
-                    style={{ textDecoration: 'none', fontSize: '14px' }}
-                >
-                    {isLogin
-                        ? "Don't have an account? Register here"
-                        : 'Already have an account? Login here'}
-                </button>
-            </div>
-            {/* Back to Home Page Button */}
-            <div className="text-center mt-4">
-                <Link
-                    href="/"
-                    className="btn btn-secondary"
+        <CommercialLayout>
+            <section
+                id="commercial-home"
+                className="position-relative text-white py-5 text-center"
+                style={{
+                    fontFamily: "Quicksand",
+                }}
+            >
+                {/* Hero Section */}
+                <div
+                    className="container position-relative d-flex flex-column justify-content-center align-items-center mb-5"
                     style={{
-                        padding: '10px 20px',
-                        borderRadius: '5px',
-                        textDecoration: 'none',
+                        zIndex: 1,
+                        backgroundColor: "rgba(0, 0, 0, 0.1)", // Semi-transparent background
+                        backdropFilter: "blur(10px)", // Apply blur to the background
+                        borderRadius: "10px", // Rounded corners for aesthetic
+                        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.4)", // Subtle shadow for separation
+                        padding: "20px", // Padding inside the text box
+                        maxWidth: "90%", // Limit the width
                     }}
                 >
-                    Back to Home Page
-                </Link>
-            </div>
-        </section>
-    );
-};
+                    <h1 className="display-3 mb-3">United Pest Control</h1>
+                    <h2 className="mb-4">Commercial Pest Control Solutions</h2>
+                    <p className="lead">
+                        Safeguard your business with our expert pest management solutions. United
+                        Pest Control has over 40 years of experience delivering trusted services
+                        tailored to large businesses.
+                    </p>
+                </div>
 
-export default Commercial;
+                {/* Services Grid */}
+                <div className="container d-flex flex-wrap justify-content-center gap-4">
+                    {services.map((service, index) => (
+                        <div
+                            key={index}
+                            className="card shadow-sm text-white"
+                            style={{
+                                width: "300px",
+                                backgroundColor: "#ffffff10",
+                                borderRadius: "10px",
+                                overflow: "hidden",
+                                boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
+                            }}
+                        >
+                            <img
+                                src={service.image}
+                                alt={service.title}
+                                className="card-img-top"
+                                style={{ height: "200px", objectFit: "cover" }}
+                            />
+                            <div className="card-body">
+                                <h5 className="card-title">{service.title}</h5>
+                                <p className="card-text">{service.description}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Call to Action */}
+                <div
+                    className="container position-relative d-flex flex-column justify-content-center align-items-center mt-5"
+                    style={{
+                        zIndex: 1,
+                        backgroundColor: "rgba(0, 0, 0, 0.1)", // Semi-transparent background
+                        backdropFilter: "blur(10px)", // Apply blur to the background
+                        borderRadius: "10px", // Rounded corners for aesthetic
+                        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.4)", // Subtle shadow for separation
+                        padding: "20px", // Padding inside the text box
+                        maxWidth: "90%", // Limit the width
+                    }}
+                >
+                    <h2>Ready to Protect Your Business?</h2>
+                    <p className="lead">
+                        Contact us today for a consultation and discover how we can help your
+                        business stay pest-free.
+                    </p>
+                    <a
+                        href="/contactus"
+                        className="btn btn-primary"
+                        style={{
+                            padding: "10px 20px",
+                            fontSize: "18px",
+                            borderRadius: "5px",
+                        }}
+                    >
+                        Contact Us
+                    </a>
+                </div>
+            </section>
+        </CommercialLayout>
+    );
+}

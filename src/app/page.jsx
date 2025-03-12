@@ -35,7 +35,7 @@ export default function Home() {
                 className="position-relative"
                 style={{
                     opacity: opacity,
-                    transition: 'opacity 0.3s ease',
+                    transition: 'opacity 0.5s ease',
                     background: 'rgba(255, 255, 255, 0.8)', // Optional semi-transparent background
                     backdropFilter: 'blur(5px)', // Optional blur effect for the header
                     zIndex: 10, // Ensure the header stays above other elements
@@ -47,25 +47,7 @@ export default function Home() {
                             className="col-12 position-absolute"
                             style={{ height: '300px' }} // Adjust height for header
                         >
-                            {/* Background Video */}
-                            <video
-                                className="bg-video"
-                                style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: '10%',
-                                    width: '80%',
-                                    height: '100%',
-                                    objectFit: 'cover',
-                                    borderRadius: '6px',
-                                    zIndex: -1, // Ensure it stays behind the content
-                                }}
-                                src="/nologo.mp4" // Path to your video file
-                                autoPlay
-                                loop
-                                muted
-                                playsInline // Ensures compatibility with mobile browsers
-                            ></video>
+
                         </div>
                     </div>
                 </div>

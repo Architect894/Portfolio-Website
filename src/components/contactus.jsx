@@ -4,38 +4,94 @@ import '../styles/global.css';
 import styles from '../styles/styles.module.css';
 
 export default function ContactUs() {
-    // Styles for the header
-    const headerStyle = {
-        color: 'white',
-        padding: '10%', // Adjust padding as needed
-        borderRadius: '25px', // For rounded corners
-        display: 'inline-block', // To center the background with the text
-        textAlign: 'center', // Center text within the header
-        width: '100%', // Ensure full width
-        fontFamily: 'Quicksand'
-    };
-
-    // Styles for paragraphs
-    const paragraphStyle = {
-        color: 'var(--bs-secondary)', // Text color to match header background for contrast
-        backgroundColor: 'var(--bs-dark)', // Light background for readability
-        padding: '15px', // Padding for paragraphs
-        borderRadius: '5px', // For rounded corners
-        textAlign: 'justify', // Justify text for better readability
-        fontFamily: 'Quicksand'
-    };
-
     return (
-        <section id="contactUs" className={`py-5 text-center ${styles['logo-container']}`}>
-            <div className="container">
-                <h2 style={headerStyle} className="mb-1 display-3">Contact Us</h2>
-                <p style={paragraphStyle} className="mb-3 lead text-white">
-                    Call us anytime!
+        <div className="bg-gray-900 py-24 sm:py-32">
+            <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+                <h2 className="text-base/7 font-semibold text-indigo-400">Stay in the loop</h2>
+                <p className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+                    Communication has never been easier.
                 </p>
-                <p style={paragraphStyle} className="mb-3 lead text-white">
-                    Tell you hwhat and I aint gonna tell you again, talk to ya bois
-                </p>
+                <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+                    {/* Card 1 */}
+                    <div className="flex p-px lg:col-span-4">
+                        <div className="overflow-hidden rounded-lg bg-white ring-1 ring-white/15 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]">
+                            <img
+                                className="h-80 object-cover object-left"
+                                src="/UTPC2.png"
+                                alt="Releases"
+                            />
+                            <div className="p-10">
+                                <h3 className="text-sm/4 font-semibold text-black">Contact</h3>
+                                <p className="mt-2 text-lg font-medium tracking-tight text-black">Get Reminded</p>
+                                <p className="mt-2 max-w-lg text-sm/6 text-black">
+                                    With every pest control appointment, we will send you reminders on when your property 
+                                    needs service!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Card 2 */}
+                    <div className="flex p-px lg:col-span-2">
+                        <div className="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-tr-[2rem]">
+                            <img
+                                className="h-80 object-cover"
+                                src="https://tailwindui.com/plus/img/component-images/bento-02-integrations.png"
+                                alt="Integrations"
+                            />
+                            <div className="p-10">
+                                <h3 className="text-sm/4 font-semibold text-gray-400">Versatility</h3>
+                                <p className="mt-2 text-lg font-medium tracking-tight text-white">
+                                    Your service, Your way
+                                </p>
+                                <p className="mt-2 max-w-lg text-sm/6 text-gray-400">
+                                    We will send you reminder messages in whichever contact method you prefer.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Card 3 */}
+                    <div className="flex p-px lg:col-span-2">
+                        <div className="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-bl-[2rem]">
+                            <img
+                                className="h-80 object-cover"
+                                src="https://tailwindui.com/plus/img/component-images/bento-02-security.png"
+                                alt="Security"
+                            />
+                            <div className="p-10">
+                                <h3 className="text-sm/4 font-semibold text-gray-400">Hospitality</h3>
+                                <p className="mt-2 text-lg font-medium tracking-tight text-white">
+                                    Peace of Mind
+                                </p>
+                                <p className="mt-2 max-w-lg text-sm/6 text-gray-400">
+                                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Card 4 */}
+                    <div className="flex p-px lg:col-span-4">
+                        <div className="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]">
+                            <img
+                                className="h-80 object-cover object-left"
+                                src="https://tailwindui.com/plus/img/component-images/bento-02-performance.png"
+                                alt="Performance"
+                            />
+                            <div className="p-10">
+                                <h3 className="text-sm/4 font-semibold text-gray-400">Performance</h3>
+                                <p className="mt-2 text-lg font-medium tracking-tight text-white">
+                                    Lightning-fast builds
+                                </p>
+                                <p className="mt-2 max-w-lg text-sm/6 text-gray-400">
+                                    Sed congue eros non finibus molestie. Vestibulum euismod augue vel commodo vulputate. Maecenas at augue sed elit dictum vulputate.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
     );
 }
